@@ -1,0 +1,103 @@
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <style>
+            *{
+                padding:0;
+                margin:0;
+            }
+                div{
+                    position:absolute;
+                    left:-360px;
+                    bottom:40px;
+                    width:400px;
+                    height:80px;
+                    background:black;              
+            }
+            div span{
+                position:absolute;
+                right:0;
+                top:0;
+                height:80px;
+                width:40px;
+                background:gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <span></span>
+        </div>
+        <script>
+            var $Div = document.getElementsByTagName('div')[0];
+            var timer =null;
+
+            $Div.onmouseenter = function(){
+                startMove(0);
+            }
+            $Div.onmouseleave = function(){
+                startMove(-360);
+            }
+           /* function startMove1(){
+                 clearInterval(timer);
+                var iSpeed ;
+                if($Div.offsetLeft < 0){
+                    iSpeed = 8;
+                }else{
+                    iSpeed = -8;
+                }
+                timer = setInterval(function(){
+
+                    <!--if($Div.offsetLeft ==300){   --> 
+
+                    if(Math.abs(300 -$Div.offsetLeft) <Math.abs(iSpeed)){
+                        clearInterval(timer);
+                        $Div.style.left ='0px';
+                    }else{
+                        $Div.style.left = $Div.offsetLeft +iSpeed +'px';
+                    }
+                },30);
+            }
+            function startMove2(){
+                 clearInterval(timer);
+                var iSpeed ;
+                if($Div.offsetLeft < -360){
+                    iSpeed = 8;
+                }else{
+                    iSpeed = -8;
+                }
+                timer = setInterval(function(){
+
+                    <!--if($Div.offsetLeft ==300){   --> 
+
+                    if(Math.abs(-360 -$Div.offsetLeft) <Math.abs(iSpeed)){
+                        clearInterval(timer);
+                        $Div.style.left ='-360px';
+                    }else{
+                        $Div.style.left = $Div.offsetLeft +iSpeed +'px';
+                    }
+                },30);
+            }*/
+            function startMove(iTarget){
+                 clearInterval(timer);
+                var iSpeed ;
+                if($Div.offsetLeft < iTarget){
+                    iSpeed = 8;
+                }else{
+                    iSpeed = -8;
+                }
+                timer = setInterval(function(){
+
+                    <!--if($Div.offsetLeft ==300){   --> 
+
+                    if(Math.abs(iTarget -$Div.offsetLeft) <Math.abs(iSpeed)){
+                        clearInterval(timer);
+                        $Div.style.left =iTarget +'px';
+                    }else{
+                        $Div.style.left = $Div.offsetLeft +iSpeed +'px';
+                    }
+                },30);
+            }
+        </script>
+    </body>
+</html>

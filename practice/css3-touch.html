@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+ 	<meta charset="utf-8">
+ 	<style type="text/css">
+ 	*{
+ 		padding:0;
+ 		margin:0;
+ 		list-style: none;
+ 	}
+ .wrapper{
+ 	width: 600px;
+ 	height: 400px;
+ 	position: relative;
+
+ }
+ .wrapper ul{
+ 	width: 600px;
+ 	height:;
+ }
+ .wrapper ul li{
+ 	height: 100px;
+ 	width: 200px;
+ }
+ .wrapper div{
+ 	position: absolute;
+ 	top:0;
+ 	left: 0;
+ 	width: 200px;
+ 	height: 600px;
+ 	opacity: 0;
+ 	transition:all 1s ease-out;
+ }
+ .wrapper ul li{
+ 	text-align: center;
+ 	font-size: 20px;
+ 	font-weight: 900;
+ 	color: gray;
+ 	line-height: 100px;
+ }
+.wrapper ul span{
+	display: block;
+	width: 200px;
+	height: 100px;
+	z-index:999;
+	position: relative;
+	left: 0;
+}
+img{
+	width: 200px;
+	height: 600px;
+}
+ /*.wrapper ul  li:nth-child(1) div{
+ 	background:red;
+ }
+ .wrapper ul li:nth-child(2) div{
+ 	background:green;
+
+ }
+ .wrapper  ul li:nth-child(3) div{
+ 	background:blue;
+
+ }
+ .wrapper ul li:nth-child(4) div{
+ 	background:yellow;
+
+ }*/
+ .wrapper ul li:hover div{
+ 	left:200px;
+ 	opacity: 1;
+ }
+ 	</style>
+
+</head>
+<body>
+	<div class="wrapper">
+		<ul>
+ 			<li>
+ 				<span>cat1</span>
+ 				<div><img src="cat1.jpg"></div>
+ 			</li>
+ 			<li>
+ 				<span>cat2</span>
+ 	 			<div><img src="cat2.jpg"></div>
+ 	 			
+ 			</li>
+ 			<li>
+ 				<span>cat3</span>
+ 				<div><img src="cat3.jpg"></div>
+ 				
+ 			</li>
+ 			<li>
+ 				<span>cat4</span>
+ 				<div><img src="cat4.jpg"></div>				
+ 			</li>
+		</ul>
+	</div>
+</body>
+</html>

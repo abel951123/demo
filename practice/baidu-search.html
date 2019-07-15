@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+            <meta charset="utf-8">
+            <style>
+                ul{
+                    display:none;
+                }
+            </style>
+        
+
+    </head>
+    <!--1.http://www.baidu.com/s?wd =奥运会》把此链接放到a标签中，点击a,回调到相关页面-->
+        <!--2.https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=*cb=dy》根据输入框中的关键字发送jsonp请求，获取相关数据-->
+        <body>
+                <input type= "text" id="ip1"/>
+                <ul id = "ul1"></ul>
+                <a href="https://www.baidu.com/s?wd=奥运会">click me</a>
+            <script>
+                var oIp = document.getElementById('ip1');
+                var oUL= document.getElementById('ul1');
+                function doJSON(data){
+                    var html = '';
+                    if(data.s.length !==0){
+                        oUL.style.display = 'block';
+                        for(var i=0;i < data.s.length;i++){
+                            	html += '<li><a href="https://www.baidu.com/s?wd=' + data.s[i] + '">' + data.s[i] + '</a></li>'		
+                            }
+                             oUL.innerHTML = html;
+                        
+                    }else{
+                        oUL.style.display = "none";
+
+                    }
+                }
+                oIp.onkeyup = function(){
+                    if(this.value !== ''){
+                        var oScript = document.createElement('script');
+                        oScript.src =' https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+this.value+'&cb=doJSON';
+                        document.body.appendChild(oScript);
+                    }else{
+                        oUL.style.display ='none';
+                    }
+                }
+               
+            </script>
+        </body>
+        <!--1.定义处理从服务器获取数据的一个函数function doJSON(DATA){} 《script src->url? wd 关键字 &cd=doJSON》 wd关键字-》搜寻相关数据-》{}  cb->doJSON  服务器doJSON 在返回服务器doJSOn->
+    
+    </html>

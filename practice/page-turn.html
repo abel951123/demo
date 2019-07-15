@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>document</title>
+	<style>
+	*{
+		padding:0px;
+		margin:0px;
+		list-style: none;
+		text-decoration: none;
+	}
+     ul{
+          width:480px;
+
+     }
+     ul li{
+          width:200px;
+          height:50px;
+          background:lightblue;
+          margin-top:10px;
+
+     }
+     div{
+          position:absolute;
+          top:500px;
+          left:20px;
+     }
+	a{
+		margin:0 5px;
+	}
+
+
+	</style>
+</head>
+<body>
+	<div id = 'div1'></div>
+        <ul id = 'ul1'></ul>
+     <script src = "move.js"></script>
+	<script >
+     var arr =[];
+     var iNow = 8-1;
+         var json = {
+            title: [
+                'result 1',
+                'result 2',
+                'result 3',
+                'result 4',
+                'result 5',
+                'result 6',
+                'result 7',
+                'result 8',
+                'result 9',
+                'result 10',
+                'result 11',
+                'result 12',
+                'result 13',
+                'result 14',
+                'result 15',
+                'result 16',
+                'result 17',
+                'result 18',
+                'result 19',
+                'result 20',
+                'result 21',
+                'result 22',
+                'result 23',  
+                'result 24',
+                'result 25',  
+                'result 26',
+                'result 27',  
+                'result 28',
+                'result 29',  
+                'result 30',
+                'result 31',  
+                'result 32',
+                'result 33',
+                'result 34',  
+                'result 35',
+                'result 36',   
+                'result 37',  
+                'result 38',
+                'result 39', 
+                'result 40',  
+                'result 41',
+                'result 42',
+                'result 43',  
+                'result 44'                                
+            ]
+        };
+	creatPage({id:'div1' ,nowNum:1 ,allNum:25,callBack:function(now,all){
+          var num = now* 8 <json.title.length ? 8 :json.title.length%8;
+          var $Ul =document.getElementById('ul1');
+           var $LiCollection = document.getElementsByTagName('li');
+          if($Ul.innerHTML ===''){
+               for(var i = 0;i<num;i++){
+                    var $Li = document.createElement('li');
+                    $Li.innerHTML = json.title[(now-1)*8 + i];
+                    $Ul.appendChild($Li);
+
+               }
+              
+               for(var i  = 0; i <$LiCollection.length ;i++){
+                 arr.push([$LiCollection[i].offsetLeft,$LiCollection[i].offsetTop]);
+               }
+               for(var i = 0; i <$LiCollection.length ;i++){
+                    $LiCollection[i].style.position ='absolute';
+                     $LiCollection[i].style.left = arr[i][0]+'px';
+                      $LiCollection[i].style.top =arr[i][1]+'px';
+                       $LiCollection[i].style.margin =0;
+               }
+          }else{
+               var timer =setInterval(function(){
+                    startMove($LiCollection[iNow],{'left':100,'top':500,'opacity':0});
+                    if(iNow == 0){
+                         clearInterval(timer);
+                         iNow = num -1;
+                         for(var i = 0;i <num ;i++){
+                              $LiCollection[i].innerHTML = json.title[(now - 1)*8 +i];
+                         }
+                              var timer2 = setInterval(function(){
+                                   startMove($LiCollection[iNow],{'left':arr[iNow][0],'top':arr[iNow][1],'opacity':100});
+                                   if(iNow == 0){
+                                        clearInterval(timer2);
+                                        iNow = num-1;
+                                   }else{
+                                        iNow--;
+                                   }
+                              },100);
+                         
+                    }else{
+                         iNow--;
+                    }
+               },100);
+          }
+     }});
+	 function creatPage(json){
+     	if(!json.id) return false;
+     	var $Div = document.getElementById(json.id);
+     	var nowNum = json.nowNum || 1;
+     	var allNum = json.allNum || 5;
+
+     	if(nowNum > 5&& allNum >=10){
+     		var $A = document.createElement('a');
+     		$A.href ='#1';
+     		$A.innerHTML = '首页';
+     		$Div.appendChild($A);					
+     	}
+     	if(nowNum >1 ){
+     		var $A = document.createElement('a');
+     		$A.href ='#'+(nowNum - 1);
+     		$A,innerHTML = '上一页';
+     		$Div.appendChild($A);
+     	}
+     	if(allNum <= 9){
+     	   for (var i = 1; i <= allNum; i++) {
+     		var $A = document.createElement('a');
+     		$A.href ='#'+i;
+     		if(nowNum ===i){
+     			$A.innerHTML = i;
+     		}else{
+     			$A.innerHTML = '['+ i +']';
+     		}
+     		$Div.appendChild($A);
+     	   }
+     	}else{
+     		for(var i = 1;i <=9 ;i++){
+     		var $A = document.createElement('a'); 
+     		if(nowNum < 5){
+     			$A.href = '#'+i;
+     			if(nowNum ===i){
+     				$A.innerHTML = i;
+     			}else{
+     				$A.innerHTML = '['+ i +']'; 
+     			}
+     		 }else if(allNum - nowNum < 4){
+     		 	$A.href = '#'+(allNum -9 +i);
+     		 	if((allNum - nowNum) === 0 && i === 9){
+     		 		$A.innerHTML = allNum -9 + i;
+     		 	}else if ((allNum - nowNum) === 1 && i === 8){
+     		 		$A.innerHTML = allNum -9 + i;
+     		 	}else if ((allNum - nowNum) === 2 && i === 7){
+     		 		$A.innerHTML = allNum -9 + i;
+     		 	}else if ((allNum - nowNum) === 3 && i === 6){
+     		 		$A.innerHTML = allNum -9 + i;
+     		 	}else{
+     		 		$A.innerHTML = '[' + (allNum - 9 +i) +']';
+     		 	}
+     		   }else{
+     		 	$A.href = '#'+(nowNum - 5 + i);
+     		 	if(i === 5){
+     		 		$A.innerHTML = nowNum - 5 +i;
+     		 	}else{
+     		 		$A.innerHTML = '[' +(nowNum - 5+i) +']';
+     		 	}
+     		 }
+     		 $Div.appendChild($A);
+     		}
+     	}
+	
+	if((allNum - nowNum) >5){
+		var $A = document.createElement('a');
+		$A.href = '#' +allNum;
+		$A.innerHTML = '尾页';
+		$Div.appendChild($A);
+	}
+	if((allNum - nowNum ) > 0){
+		$A = document.createElement('a');
+		$A.href = '#' + (nowNum +1);
+		$A.innerHTML = '下一页';
+		$Div.appendChild($A);
+
+	}
+
+	var $All = document.getElementsByTagName('a');
+	for(var i = 0; i< $All.length ; i++){
+		$All[i].onclick = function(){
+			var nowNum = parseInt(this.getAttribute('href').substring(1));
+			$Div.innerHTML = '';
+               json.nowNum = nowNum;
+			creatPage(json);
+		}
+	}
+
+     json.callBack(nowNum,allNum);
+}
+function getStyle (obj, attr) {
+    if (obj.currentStyle) {
+        return obj.currentStyle[attr];
+    }else {
+        return window.getComputedStyle(obj,false)[attr];
+    }
+}
+        
+function startMove (obj,json) {
+    clearInterval(obj.timer);
+    var iSpeed;
+    var iCur;       
+    var name;     
+    obj.timer = setInterval(function () {
+        var bStop = true;
+        for (var attr in json) {
+            if (attr === 'opacity') {
+                name = attr;
+                iCur = parseFloat(getStyle(obj,attr)) * 100;
+            }else {
+                iCur = parseInt(getStyle(obj,attr));
+            }
+            iSpeed = (json[attr] - iCur) / 7;
+            
+            if (iSpeed > 0) {
+                iSpeed = Math.ceil(iSpeed);
+            }else {
+                iSpeed = Math.floor(iSpeed);
+            }                
+            if (attr === 'opacity') {
+                obj.style.opacity = (iCur + iSpeed) / 100;
+            }else {
+                obj.style[attr] = iCur + iSpeed + 'px'; 
+            }                    
+            if (Math.floor(Math.abs(json[attr] - iCur)) != 0) {
+                bStop = false;
+            }
+        } 
+        if (bStop) {
+            if (name === 'opacity') {
+                obj.style.opacity = json[name] / 100;   
+            }
+            clearInterval(obj.timer);
+            // func();
+        }               
+    },30);
+}
+	</script>
+	</div>
+</body>
+</html>

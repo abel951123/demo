@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="jquery.js"></script>
+	<style type="text/css">
+	  	* {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-decoration: none;
+			font: 12px Helvetica,Arial,sans-serif;
+		}
+		a:hover {
+		    color: #FFFFFF;
+		    text-decoration: none;
+		}
+		.global-nav {
+			height: 28px;
+			color: #d5d5d5;
+			background-color: #545652;
+			min-width: 950px;
+		}
+		.global-nav a:link, .global-nav a:visited, .global-nav a:hover, .global-nav a:active {
+		    color: #d5d5d5;
+		}
+		.global-nav .top-nav-info {
+			float: right;
+			margin: 0 12px 0 0;
+			line-height: 28px;
+		}
+		.global-nav .top-nav-info a {
+		    display: inline-block;
+		    zoom: 1;
+		    margin: 0;
+		    padding: 0 12px;
+		    height: 28px;
+		    cursor: pointer;
+			color: #d5d5d5;
+			line-height: 28px;
+		}
+		.global-nav .top-nav-doubanapp {
+		    position: relative;
+		    float: right;
+		    margin-right: 5px;
+		    line-height: 28px;
+		}
+		.global-nav .top-nav-doubanapp .lnk-doubanapp {
+		    display: inline-block;
+		    zoom: 1;
+		    padding: 0 8px;
+		    height: 28px;
+		}
+		.global-nav .global-nav-items {
+		    font-size: 0;
+		}
+		.global-nav .global-nav-items li {
+		    display: inline-block;
+		    zoom: 1;
+		    line-height: 28px;
+		    font-size: 12px;
+		    vertical-align: baseline;
+		}
+		.global-nav .global-nav-items a {
+		    display: inline-block;
+		    zoom: 1;
+		    padding: 0 12px;
+		    height: 28px;
+		    line-height: 28px;
+		}
+		.global-nav a:hover {
+			color: #fff;
+		}
+		#db-nav-sns {
+		    position: relative;
+		    zoom: 1;
+		    background: #edf4ed;
+		}
+		.nav {
+		    width: 100%;
+		    min-width: 950px;
+		    overflow: hidden;
+		    zoom: 1;
+		    margin-bottom: 40px;
+		}
+		#db-nav-sns .nav-wrap {
+		    border: none;
+		}
+		#db-nav-sns .nav-primary {
+		    overflow: hidden;
+		    padding-top: 12px;
+		    zoom: 1;
+		}
+		.nav .nav-primary {
+		    position: relative;
+		    padding: 10px 0 5px;
+		    overflow: hidden;
+		    zoom: 1;
+		}
+		.nav .nav-primary, .nav .nav-secondary {
+		    width: 950px;
+		    margin: 0 auto;
+		    padding-bottom: 0;
+		    overflow: hidden;
+		    zoom: 1;
+		}
+		#db-nav-sns .nav-search {
+		    position: absolute;
+		    right: 0;
+		    width: 280px;
+		    height: 30px;
+		}
+		.nav-search {
+		    position: relative;
+		    overflow: hidden;
+		    zoom: 1;
+		    padding: 10px 0 15px 0;
+		}
+		#db-nav-sns .inp {
+		    width: 278px;
+		    height: 28px;
+		    background: #fff;
+		    border: 1px solid #e1e9e1;
+		    text-align: left;
+		    -webkit-border-radius: 0;
+		    -moz-border-radius: 0;
+		    -ms-border-radius: 0;
+		    border-radius: 0;
+		}
+		.nav-search .inp {
+		    float: left;
+		    width: 470px;
+		    height: 34px;
+		    text-align: center;
+		    _margin-right: -3px;
+		    cursor: text;
+		    background: url(/f/shire/d45aaa7569335285e298dd7f3c045c8b364a19de/pics/nav1/nav_bg_a1.png) no-repeat 0 0;
+		}
+		#db-nav-sns .inp input {
+		    margin: 0;
+		    width: 242px;
+		    height: 28px;
+		    line-height: "26px	";
+		    color: gray;
+		}
+		.nav-search .inp input {
+		    background: #fff;
+		    width: 96%;
+		    margin: 0;
+		    text-align: left;
+		    height: 30px;
+		    padding-left: 10px;
+		    height: 28px\9;
+		    line-height: 28px\9;
+		    outline: none;
+		}
+		.nav-search input {
+		    -webkit-appearance: none;
+		    border: none;
+		    background: transparent;
+		}
+		input {
+		    font-size: 12px;
+		}
+		input {
+		    margin-right: 3px;
+		    vertical-align: middle;
+		}
+		#db-nav-sns .inp-btn {
+		    position: absolute;
+		    left: auto;
+		    top: 10px;
+		    right: 0;
+		    width: 30px;
+		    height: 28px;
+		    border: 1px solid #e1e9e1;
+		    border-left: none;
+		    background-color: #fff;
+		    font-size: 0;
+		    overflow: hidden;
+		}
+		#db-nav-sns .inp-btn button {
+		    width: 30px;
+		    height: 28px;
+		    padding: 0;
+		    margin: 0;
+		    line-height: 100px;
+		    background: transparent url(https://img3.doubanio.com/f/shire/f71f15922ebd7c0ff0ea0e7a25577529efd8981a/pics/icon/bn_srh_1.png) no-repeat 50% 50%;
+		}
+		#db-nav-sns .nav-logo {
+		    width: 184px;
+		    height: 57px;
+		    background-position: 0 10px;
+		    float: left;
+		    margin: 0 13px 0 0;
+		    background: url(https://img3.doubanio.com/f/shire/8308f83ca66946299fc80efb1f10ea21f99ec2a5/pics/nav/lg_main_a11_1.png) no-repeat 0 12px;
+		}
+		#db-nav-sns .nav-items {
+		    float: left;
+		    margin-top: 15px;
+		}
+		#db-nav-sns .nav-items li {
+		    margin-right: 20px;
+		    font-size: 15px;
+		}
+		#db-nav-sns li {
+		    display: inline;
+		}
+		#db-nav-sns a:link, #db-nav-sns a:visited {
+		    color: #072;
+		}
+		#wrapper {
+			width: 950px;
+			margin: 0 auto;
+		}
+		#content {
+			min-height: 420px;
+		}
+		.grid-16-8 .article {
+		    float: left;
+		    width: 590px;
+		    padding-right: 40px;
+		}
+		.mod-search {
+		    position: relative;
+		    overflow: hidden;
+		    zoom: 1;
+		    margin-bottom: 28px;
+		    background-color: #f7f7f8;
+		    padding: 7px;
+		}
+		.search-cate {
+		    float: left;
+		    margin-right: 35px;
+		    width: 65px;
+		    font-size: 0;
+		}
+		.mod-search .inp {
+		    height: 30px;
+		    cursor: text;
+		    border: 1px solid #dcdcdc;
+		    background-color: #fff;
+		}
+		.mod-search .inp-btn {
+		    position: absolute;
+		    top: 6px;
+		    right: 6px;
+		    width: 30px;
+		    height: 30px;
+		    zoom: 1;
+		    overflow: hidden;
+		}
+		.mod-search .inp input {
+		    background: #fff;
+		    width: 94%;
+		    margin: 0;
+		    text-align: left;
+		    height: 30px;
+		    padding-left: 6px;
+		    height: 28px\9;
+		    line-height: 28px\9;
+		    outline: 0;
+		}
+		.mod-search input {
+		    -webkit-appearance: none;
+		    border: 0;
+		    background: transparent;
+		}
+		.mod-search .inp-btn button{
+		    width: 100%;
+		    height: 100%;
+		    font-size: 0;
+		    padding: 35px 0 0 0;
+		    overflow: hidden;
+		    background: url(https://img3.doubanio.com/f/sns/f71f15922ebd7c0ff0ea0e7a25577529efd8981a/pics/icon/bn_srh_1.png) no-repeat 45% 45%;
+		    color: transparent;
+		    cursor: pointer;
+		}
+		.search-cate li {
+		    width: 65px;
+		    display: inline-block;
+		    zoom: 1;
+		    margin-bottom: 12px;
+		    line-height: 1.2;
+		    font-size: 12px;
+		}
+
+		.search-cate li a {
+		    display: block;
+		    padding: 3px 0;
+		    text-align: center;
+		    color: black;
+		}
+		.search-cate li a:hover {
+			background: #7fc06e;
+			color: #fff;
+			border-radius: 3px;
+		}
+		.search-cate .on a:link, .search-cate .on a:visited, .search-cate .on a:hover, .search-cate .on a:active {
+		    background: #7fc06e;
+		    color: #fff;
+		    border-radius: 3px;
+		}
+		.search-result {
+			margin-left: 100px;
+		}
+		.topic-promotion {
+		    font-size: 13px;
+		    border-bottom: 1px dashed #CCC;
+		    padding-bottom: 15px;
+		    margin-bottom: 10px;
+		}
+		.topic-promotion a.new-icon {
+		    background: #F5F5F5 url('https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif') no-repeat right 0;
+		}
+		.topic-promotion a {
+		    display: inline-block;
+		    padding: 3px 23px;
+		    margin-right: 10px;
+		    background: #F5F5F5;
+		}
+		.topic-promotion span {
+		    font-size: 12px;
+		    color: gray;
+		}
+		.result-list {
+		    margin-bottom: 27px;
+		    overflow: hidden;
+		    zoom: 1;
+		    padding-right: 3px;
+		}
+		.result {
+		    position: relative;
+		    width: 100%;
+		    zoom: 1;
+		    padding-top: 20px;
+		    margin: -1px 0 17px;
+		    border-top: 1px dashed #ccc;
+		}
+		.result .pic {
+		    float: right;
+		    width: 62px;
+		    text-align: right;
+		    position: relative;
+		}
+		.result .content {
+		    overflow: hidden;
+		}
+		.result:after {
+		    content: '\0020';
+		    clear: both;
+		    display: block;
+		}
+		.result .pic img {
+		    max-width: 48px;
+		    _width: 48px;
+		}
+		.result .content .title {
+		    margin-bottom: 3px;
+		    color: #5d5d5d;
+		}
+		.result .content h3 {
+		    width: 85%;
+		    height: auto;
+		    margin: -4px 0 6px 0;
+		    word-wrap: break-word;
+		    background: transparent;
+		}
+		h3 {
+		    margin-left: 4px;
+		    font: 14px Arial, Helvetica, sans-serif;
+		    color: #666666;
+		    margin-bottom: 1px;
+		    line-height: 1.8;
+		    background-color: #f2fbf2;
+		}
+		.allstar45 {
+		    background-position: 0 -11px;
+		}
+		.rating_nums {
+		    padding-left: 0;
+		}
+		.rating_nums, .rating_num {
+		    color: #e09015;
+		    font-size: 12px;
+		    padding: 0 3px;
+		}
+		.result .content .title {
+		    margin-bottom: 3px;
+		    color: #5d5d5d;
+		}
+		.result .subject-cast {
+		    margin-left: 10px;
+		}
+		.result .content p {
+		    margin: 0;
+		    color: #999;
+		    line-height: 1.5;
+		    white-space: normal;
+		    -webkit-line-clamp: 3;
+		    display: -webkit-box;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    -webkit-box-orient: vertical;
+		}
+		.xin {
+			width: 55px;
+			height: 11px;
+			display: inline-block;
+			background-image: url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png);
+		}
+
+		.result-list-ft {
+		    background-color: #f8f8f8;
+		}
+		.result-list-ft span {
+			display: block;
+			line-height: 32px;
+			text-align: center;
+		}
+		.result-list-ft span:hover {
+			background-color: #f4f4f4;
+			color: #333;
+			cursor: pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<div id="db-global-nav" class="global-nav">
+		<div class="bd">
+			<div class="top-nav-info">
+				<a href="#">登录</a><a href="#">注册</a>
+			</div>
+			<div class="top-nav-doubanapp" class="lnk-doubanapp">
+				<a href="#">下载豆瓣客户端</a>
+			</div>
+			<div class="global-nav-items">
+				<ul>
+					<li>
+						<a href="#">豆瓣</a>
+					</li>
+					<li>
+						<a href="#">读书</a>
+					</li>
+					<li>
+						<a href="#">电影</a>
+					</li>
+					<li>
+						<a href="#">音乐</a>
+					</li>
+					<li>
+						<a href="#">同城</a>
+					</li>
+					<li>
+						<a href="#">小组</a>
+					</li>
+					<li>
+						<a href="#">阅读</a>
+					</li>
+					<li>
+						<a href="#">FM</a>
+					</li>
+					<li>
+						<a href="#">东西</a>
+					</li>
+					<li>
+						<a href="#">市集</a>
+					</li>
+					<li>
+						<a href="#">更多</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="db-nav-sns" class="nav">
+		<div class="nav-wrap">
+			<div class="nav-primary">
+				<div class="nav-search">
+						<div class="inp">
+							<input type="text" value="搜索你感上兴趣的内容...">
+						</div>
+						<div class="inp-btn">
+							<button></button>
+						</div>
+				</div>
+				<div class="nav-logo">
+				</div>
+				<div class="nav-items">
+					<ul>
+						<li>
+							<a href="#">首页</a>
+						</li>
+						<li>
+							<a href="#">浏览发现</a>
+							<img src="https://img3.doubanio.com/f/shire/e49eca1517424a941871a2667a8957fd6c72d632/pics/new_menu.gif">
+						</li>
+						<li>
+							<a href="#">移动应用</a>
+						</li>
+						<li>
+							<a href="#">游戏</a>
+						</li>
+						<li>
+							<a href="#">线上活动</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="wrapper">
+		<div id="content">
+			<div class="grid-16-8 clearfix">
+				<div class="article">
+					<div class="mod-search">
+							<div class="inp">
+								<input type="text" value="搜索你感上兴趣的内容和人" style="color:gray"onfocus="if(this.value=='搜索你感上兴趣的内容和人'){this.value='';}"onblur="if(this.value==''){this.value='搜索你感上兴趣的内容和人';}">
+							</div>
+							<div class="inp-btn">
+								<button></button>
+							</div>
+					</div>
+					<div class="search-cate" style="height: 1px;">
+						<ul style="position:static;width:auto;top:5px">
+							<li class="on">
+								<a href="#">全部</a>
+							</li>
+							<li>
+								<a href="#">图片</a>
+							</li>
+							<li>
+								<a href="#">成员</a>
+							</li>
+							<li>
+								<a href="#">小组</a>
+							</li>
+							<li>
+								<a href="#">小战</a>
+							</li>
+							<li>
+								<a href="#">书籍</a>
+							</li>
+							<li>
+								<a href="#">电影</a>
+							</li>
+							<li>
+								<a href="#">音乐</a>
+							</li>
+							<li>
+								<a href="#">游戏</a>
+							</li>
+							<li>
+								<a href="#">条目</a>
+							</li>
+							<li>
+								<a href="#">日记</a>
+							</li>
+							<li>
+								<a href="#">市集</a>
+							</li>
+							<li>
+								<a href="#">舞台剧</a>
+							</li>
+							<li>
+								<a href="#">同城活动</a>
+							</li>
+							<li>
+								<a href="#">地点</a>
+							</li>
+							<li>
+								<a href="#">移动应用</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+
+		var $Inp = $('.inp>input').eq(1);	
+		var $InpBtn = $('.inp-btn>button').eq(1);
+		function competeStar(rate) {
+				rate = +rate;
+				if (rate==10) {
+					return '0px';
+				}else if(rate<10&&rate>=9) {
+					return '0 -11px';
+				}else if(rate<9&&rate>=8) {
+					return '0 -22px';
+				}else if(rate<8&&rate>=7) {
+					return '0 -33px';
+				}else if(rate<7&&rate>=6) {
+					return '0 -44px';
+				}else if(rate<6&&rate>=5) {
+					return '0 -55px';
+				}else if(rate<5&&rate>=4) {
+					return '0 -66px';
+				}else if(rate<4&&rate>=3) {
+					return '0 -77px';
+				}else if(rate<3&&rate>=2) {
+					return '0 -88px';
+				}else if(rate<2&&rate>=1) {
+					return '0 -99px';
+				}else {
+					return '0 -110px';
+				}
+			}
+		function callBack(data) {
+			console.log(data);
+			var obj = data;
+			var $ResultList2 = $('.result-list');
+			for (var i = 0; i < data.count; i++) {
+				$ResultList2.append($('<div class="result">\
+						<div class="pic">\
+							<a href="#" class="nbg"></a>\
+							<img src="'+ data['books'][i]['images']['small'] +'">\
+						</div>\
+						<div class="content">\
+							<div class="title">\
+								<h3>\
+									<span>[书籍]</span>&nbsp;\
+									<a href="#">'+data['books'][i]['title']+'</a>\
+								</h3>\
+								<div class="rating-info">\
+									<span class="xin"></span>\
+									<span class="rating_nums">'+ data['books'][i]['rating']['average']+'</span>\
+									<span>('+data['books'][i]['rating']['numRaters']+')评价</span>\
+									<span class="subject-cast">'+data['books'][i]['author'][0]+'/ '+data['books'][i]['translator'][0]+'/ '+data['books'][i]['publisher']+'/ '+data['books'][i]['pubdate']+'</span>\
+								</div>\
+							</div>\
+							<p>'+data['books'][i]['summary']+'</p>\
+						</div>\
+					</div>'));
+				$('.xin').eq(i+data.start).css('background-position', competeStar(data['books'][i]['rating']['average']));		
+			}
+			if(data.total > data.count+ data.start) {
+				$ResultList2.append('<div class="result-list-ft"><span data-q="'+$SearchContext+'" data-start="'+(data.count+data.start)+'">显示更多</span></div>');
+				$('.result-list-ft').find('span').on('click', function() {
+				$('.result-list-ft').css('display', 'none');
+					$.ajax({
+						type: 'get',
+						url: 'https://api.douban.com/v2/book/search',
+						dataType: 'jsonp',
+						data: {q: $('.result-list-ft').find('span').attr('data-q'), start: obj.start+obj.count, count: (obj.count+obj.start+10>obj.total)?obj.total-obj.count-obj.start:10},
+						success: function(data) {
+							callBack(data);
+						}
+					});
+				});	
+			}else {
+
+				$('.result-list-ft').attr('display', 'none');
+			}
+		}
+		$InpBtn.on('click', function(){
+			$('.search-result').html('');
+			$SearchContext = $Inp.prop('value');
+			var $ResultList = $('<div class="search-result"/>');
+			$ResultList.append($('<div class="topic-promotion"/>')).append($('<div class="result-list"/>')).find('.topic-promotion').append($('<a href="#" class="new-icon">'+ $SearchContext + '</a>')).append($('<span>关于' + $SearchContext + '的精彩内容</span>'));
+			$ResultList.appendTo($('.article'));
+			$.ajax({
+				type: 'get',
+				url: 'https://api.douban.com/v2/book/search',
+				dataType: 'jsonp',
+				data: {q:$SearchContext, start: 0, count: 10},
+				success: function(data) {
+					callBack(data);		
+				}
+			});
+		});	
+
+	</script>
+</body>
+</html>	

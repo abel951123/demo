@@ -1,0 +1,79 @@
+<html lang ="lang">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div{
+            position:absolute;
+            left:100px;
+            top:100px;
+            width:100px;
+            height:100px;
+            background:deeppink;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        
+      function setCookie(name ,value,iDay){
+      	var oDate = new Date();
+      	oDate.setDate(oDate.getDate()+iDay);
+      	document.cookie =name+'='+value+';expires='+oDate;
+
+      }
+      function getCookie(key){
+      	var str =document.cookie;
+      	var arr = str.split('; ');
+      	for(var  i  = 0;i<arr.length;i++){
+      		var arr2 = arr[i].split('=');
+      		console.log(arr2);
+      		if(arr2[0] == key){
+      			return arr2[1];
+
+      		}
+      	}
+            return'';
+      }
+      function removeCookie(key){
+      	setCookie(name,'1',-1);
+      }
+
+
+
+
+
+      var x = getCookie('x');
+      var y = getCookie('y');      //获取cookie值
+      if(x){                 //刚开始可能存过，就没值
+          oDiv.style.left = x +'px';
+          oDiv.style.top = y+'px';
+      }
+        var oDiv = document.getElementsByTagName('div')[0];
+        oDiv.onmousedown = function(e){
+            var event = event ||e;
+            var disX = event.clientX-this.offsetLeft;
+            var disY = event.clientY -this.offsetTop;
+            document.onmousemove = function(e){
+                var event = event||e;
+
+                var newL = event.clientX-disX;
+                var newT = event.clientY -disY;
+
+                oDiv.style.left = newL+'px';
+                oDiv.style.top = newT + 'px';
+
+            }
+            document.onmouseup = function(){
+                document.onmousemove = null;
+                document.onmouseup = null;
+                setCookie('x',oDiv.offsetLeft,1);    //鼠标抬起的时候，将位置存到cooks里
+                setCookie('y',oDiv.offsetTop,1);
+            }
+        }
+
+    </script>
+
+
+</body>
+</html>
