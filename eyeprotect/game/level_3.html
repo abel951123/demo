@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>基于HTML的视力保护游戏</title>
+    <style>
+      a{
+        text-decoration:none;
+        color: black;
+      }
+        #begin{
+            width: 1440px;
+            height: 760px;
+        }
+        .control{
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: fixed;
+            z-index: 999;
+        }
+        #up{
+            left: 10%;
+            top: 10%;
+        }
+        #donw{
+            left: 10%;
+            top: 20%;
+        }
+        .cen{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.86);
+            background: #019b45;
+            transition: 0.1s;
+        }
+        .cen>div{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.84);
+            background: white;
+        }
+        .ren{
+            position: absolute;
+            top: 76%;
+            width: 20%;
+            height: 30%;
+            background: transparent;
+            transform: scale(0.86);
+            z-index: 100;
+            transition:left 0.2s,right 0.2s;
+        }
+        .enemy{
+            position: absolute;
+            width: 10%;
+            height: 30%;
+            background: black;
+            transform: scale(0.86);
+            z-index: 100;
+            transition: 0.1s;
+        }
+        #mesbox{
+            position: fixed;
+            top: 35%;
+            left: 34%;
+            z-index: 9999;
+            padding: 3% 4%;
+            background: beige;
+            opacity: 0.9;
+            border: #555555 1px solid;
+        }
+        .close{
+            position: absolute;
+            right: 4%;
+            top: 5%;
+            cursor: pointer;
+            font-size: 25px;
+        }
+      #win{
+        display: none;
+        position: fixed;
+        top: 35%;
+        left: 34%;
+        width: 20%;
+        z-index: 9998;
+        padding: 3% 4%;
+        background: beige;
+        opacity: 0.9;
+        border: #555555 1px solid;
+        text-align: center;
+        font-size: 40px;
+      }
+      #lose{
+        display: none;
+        position: fixed;
+        top: 35%;
+        left: 34%;
+        width: 20%;
+        z-index: 9998;
+        padding: 3% 4%;
+        background: beige;
+        opacity: 0.9;
+        border: #555555 1px solid;
+        text-align: center;
+        font-size: 40px;
+        cursor: pointer;
+      }
+    </style>
+</head>
+<body>
+<div id="mesbox">
+    <div class="close" onclick="cw()">开始</div>
+    <div>第三关</div>
+    <br>小方块有了自己的样子，但也丢失了左右方向键</br>躲避黑色方块，控制护眼龙，在60秒之内，前往</br>终点，再回到起点</div>
+</div>
+<div id="win">
+  <div>恭喜通关</div>
+  <div style="margin-top: 20px"><a href="../ranking/ranking.html">排行榜</a></div>
+</div>
+<div id="lose">
+  <div>胜败乃兵家常事，往大侠重头来过</div>
+  <div onclick="window.location.reload()">重来</div>
+</div>
+<div id="djs">60s</div>
+<div id="begin"></div>
+<div class="control-box">
+    <div class="control" id="up" onclick="up()" style="background-image: url(&quot;../img/up-arrow.jpg&quot;);background-repeat: round;"></div>
+    <div class="control" id="donw" onclick="down()" style="background-image: url(&quot;../img/down-arrow.jpg&quot;);background-repeat: round;"></div>
+</div>
+</body>
+<script>
+    //加载远眺图,num为远眺层数
+    function cw() {
+      document.getElementById("mesbox").style.display="none";
+      rt();
+    }
+
+    function rt() {
+      var djs=setTimeout(function () {
+        rt();
+      }, 1000);
+      if (time==0){
+
+      }
+      console.log(parseInt(document.getElementById("djs").innerHTML));
+      var time=parseInt(document.getElementById("djs").innerHTML);
+      time--;
+      document.getElementById("djs").innerHTML=time+"s";
+    }
+    function loading(num) {
+        var str="";
+        for(var n=0;n<num;n++){
+            str+="<div class='cen'><div><div class='ren' style='left: 40%;top: 76%;'>"
+            if (0<n&&n<num-1){
+                str+="</div><div class='enemy ";
+                if (Math.random()<0.5)
+                    str+="lenemy' ";
+                else
+                    str+="renemy' ";
+                if (Math.random()<0.5)
+                    str+="style='left: "+parseInt(Math.random()*100)+"%;top:76%'>";
+                else
+                    str+="style='left: -6%;top:"+parseInt(Math.random()*76)+"%'>";
+            }
+            str+="</div>";
+        }
+        document.getElementById("begin").innerHTML=str;
+    }
+    loading(10);
+
+    var laps=document.getElementsByClassName("cen");
+    var ren=document.getElementsByClassName("ren");
+    var enemy=document.getElementsByClassName("enemy");
+    var i=0;
+
+    //控制器
+    function up() {
+        if (i<laps.length-1){
+            i++;
+            change(i,0);
+        }
+    }
+
+    function down() {
+        if (i>0){
+            i--;
+            change(i,1);
+          if (i==0){
+            document.getElementById("win").style.display="block";
+          }
+        }
+    }
+
+    //玩家位置变化
+    function change(n,m) {
+        laps[n].style.background="green";
+        ren[n].style.background="url(../img/play.gif)";
+        ren[n].style.backgroundRepeat="round"
+;        if (n>=0&&n<=laps.length-1){
+            if(m==0&&n!=0){
+                n--;
+            }
+            else if(n!=laps.length-1){
+                n++;
+            }
+            laps[n].style.background="#019b45";
+            ren[n].style.background="transparent";
+            var a=ren[n].offsetLeft;
+        }
+    }
+
+    //棋子自动动
+    function eauto() {
+        var stn=setTimeout(function () {
+            eauto();
+        }, 50);
+        var lenemy=document.getElementsByClassName("lenemy");
+        var renemy=document.getElementsByClassName("renemy");
+        for(var n=0;n<lenemy.length;n++){
+            var path=parseInt(lenemy[n].style.left);
+            var pathh=parseInt(lenemy[n].style.top);
+            if (path<95&&pathh==76){
+                path++;
+                lenemy[n].style.left=path+"%";
+            }
+            else if(path>-6&&pathh==-6){
+                path--;
+                lenemy[n].style.left=path+"%";
+            }
+            else if(path>=95&&pathh>=-6){
+                pathh--;
+                lenemy[n].style.top=pathh+"%";
+            }
+            else if(path>=-6&&pathh<=76){
+                pathh++;
+                lenemy[n].style.top=pathh+"%";
+            }
+        }
+        for(var n=0;n<renemy.length;n++){
+            var rpath=parseInt(renemy[n].style.left);
+            var rpathh=parseInt(renemy[n].style.top);
+            if (rpath>-6&&rpathh==76){
+                rpath--;
+                renemy[n].style.left=rpath+"%";
+            }
+            else if(rpath==-6&&rpathh>-6){
+                rpathh--;
+                renemy[n].style.top=rpathh+"%";
+            }
+            else if(rpath<95&&rpathh==-6){
+                rpath++;
+                renemy[n].style.left=rpath+"%";
+            }
+            else if(rpath==95&&rpathh<=76){
+                rpathh++;
+                renemy[n].style.top=rpathh+"%";
+            }
+        }
+        var str=enemy[i-1].className.split(" ");
+        for(var j=0;j<ren.length;j++){
+            ren[j].classList.remove(ren[j].className.split(" ")[1]);
+            ren[j].classList.add(str[1]);
+        }
+        decide();
+    }
+
+
+    function CreateFile(name,time)
+    {
+       var fso, tf;
+       fso = new ActiveXObject("Scripting.FileSystemObject");
+       tf = fso.CreateTextFile("../ranking/tsconfig.json", true);
+       tf.Write(name,time) ;
+       tf.Close();
+    }
+
+    window.onload=function (){
+        change(0,1);
+        eauto();
+    }
+
+    //碰撞判定
+    function decide() {
+        if(i!=0&&i!=ren.length-1){
+            if (Math.abs((parseInt(ren[i].style.left)+10)-(parseInt(enemy[i-1].style.left)+5))<13){
+                laps[i].style.background="#019b45";
+                ren[i].style.background="transparent";
+                laps[0].style.background="green";
+                ren[0].style.background="url(../img/play.gif)";
+                ren[0].style.backgroundRepeat="round"
+                i=0;
+            }
+        }
+    }
+</script>
+</html>

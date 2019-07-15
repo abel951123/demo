@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+      a{
+        text-decoration:none;
+        color: black;
+      }
+        #begin{
+            width: 1440px;
+            height: 760px;
+        }
+        .control{
+            width: 50px;
+            height: 50px;
+            background: black;
+            position: fixed;
+            z-index: 999;
+        }
+        #up{
+            left: 10%;
+            top: 10%;
+        }
+        #donw{
+            left: 10%;
+            top: 20%;
+        }
+        #left{
+            left: 1%;
+            top: 20%;
+        }
+        #right{
+            left: 19%;
+            top: 20%;
+        }
+        .cen{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.86);
+            background: #019b45;
+            transition: 0.1s;
+        }
+        .cen>div{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.84);
+            background: white;
+        }
+        .ren{
+            position: absolute;
+            top: 76%;
+            width: 20%;
+            height: 30%;
+            background: transparent;
+            transform: scale(0.86);
+            z-index: 100;
+            transition:left 0.2s,right 0.2s;
+        }
+        .enemy{
+            position: absolute;
+            top: 76%;
+            width: 10%;
+            height: 30%;
+            left: 0%;
+            background: black;
+            transform: scale(0.86);
+            z-index: 100;
+            transition: 0.1s;
+        }
+        #mesbox{
+            position: fixed;
+            top: 35%;
+            left: 34%;
+            z-index: 9999;
+            padding: 3% 4%;
+            background: beige;
+            opacity: 0.9;
+            border: #555555 1px solid;
+        }
+        .close{
+            position: absolute;
+            right: 4%;
+            top: 5%;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        #win{
+          display: none;
+          position: fixed;
+          top: 35%;
+          left: 34%;
+          width: 20%;
+          z-index: 9998;
+          padding: 3% 4%;
+          background: beige;
+          opacity: 0.9;
+          border: #555555 1px solid;
+          text-align: center;
+          font-size: 40px;
+        }
+        #lose{
+          display: none;
+          position: fixed;
+          top: 35%;
+          left: 34%;
+          width: 20%;
+          z-index: 9998;
+          padding: 3% 4%;
+          background: beige;
+          opacity: 0.9;
+          border: #555555 1px solid;
+          text-align: center;
+          font-size: 40px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="mesbox">
+    <div class="close" onclick="cw()">开始</div>
+    <div>第二关</div>
+    <br>现在方块会自己移动了，躲避黑色方块，控制红色方块</br>，在60秒之内，前往终点，再回到起点</div>
+</div>
+<div id="win">
+  <div>恭喜通关</div>
+  <div style="margin-top: 20px"><a href="level_3.html">下一关</a></div>
+</div>
+<div id="lose">
+  <div>胜败乃兵家常事，往大侠重头来过</div>
+  <div onclick="window.location.reload()">重来</div>
+</div>
+<div id="djs">60s</div>
+<div id="begin"></div>
+<div class="control-box">
+    <div class="control" id="up" onclick="up()" style="background-image: url(&quot;../img/up-arrow.jpg&quot;);background-repeat: round;"></div>
+    <div class="control" id="donw" onclick="down()" style="background-image: url(&quot;../img/down-arrow.jpg&quot;);background-repeat: round;"></div>
+    <div class="control" id="left" onclick="left()" style="background-image: url(&quot;../img/left-arrow.jpg&quot;);background-repeat: round;"></div>
+    <div class="control" id="right" onclick="right()" style="background-image: url(&quot;../img/right-arrow.jpg&quot;);background-repeat: round;"></div>
+</div>
+</body>
+<script>
+  function cw() {
+    document.getElementById("mesbox").style.display="none";
+    rt();
+  }
+
+  function rt() {
+    var djs=setTimeout(function () {
+      rt();
+    }, 1000);
+    if (time==0){
+
+    }
+    console.log(parseInt(document.getElementById("djs").innerHTML));
+    var time=parseInt(document.getElementById("djs").innerHTML);
+    time--;
+    document.getElementById("djs").innerHTML=time+"s";
+  }
+
+    function loading(num) {
+        var str="";
+        for(var n=0;n<num;n++){
+            str+="<div class='cen'><div><div class='ren' style='left: 40%'>"
+            if (0<n&&n<num-1){
+                str+="</div><div class='enemy ";
+                if (Math.random()<0.5)
+                    str+="lenemy' ";
+                else
+                    str+="renemy' ";
+                str+="style='left: "+parseInt(Math.random()*100)+"%'>";
+            }
+            str+="</div>";
+        }
+        document.getElementById("begin").innerHTML=str;
+    }
+    loading(10);
+
+    var laps=document.getElementsByClassName("cen");
+    var ren=document.getElementsByClassName("ren");
+    var enemy=document.getElementsByClassName("enemy");
+    var i=0;
+
+    //控制器
+    function up() {
+        if (i<laps.length-1){
+            i++;
+            change(i,0);
+        }
+    }
+
+    function down() {
+        if (i>0){
+            i--;
+            change(i,1);
+          if (i==0){
+            document.getElementById("win").style.display="block";
+          }
+        }
+    }
+
+    function left() {
+        var str=ren[0].style.left;
+        str=parseInt(str);
+        if (str>=10)
+            str-=10;
+        for(var n=0;n<laps.length;n++)
+        ren[n].style.left=str+"%";
+    }
+
+    function right() {
+        var str=ren[0].style.left;
+        str=parseInt(str);
+        if (str<80)
+            str+=10;
+        for(var n=0;n<laps.length;n++)
+            ren[n].style.left=str+"%";
+    }
+
+    //玩家位置变化
+    function change(n,m) {
+        laps[n].style.background="green";
+        ren[n].style.background="red";
+        if (n>=0&&n<=laps.length-1){
+            if(m==0&&n!=0){
+                n--;
+            }
+            else if(n!=laps.length-1){
+                n++;
+            }
+            laps[n].style.background="#019b45";
+            ren[n].style.background="transparent";
+            var a=ren[n].offsetLeft;
+        }
+    }
+
+    //棋子自动动
+    function eauto() {
+        var stn=setTimeout(function () {
+            eauto();
+        }, 50);
+        var lenemy=document.getElementsByClassName("lenemy");
+        var renemy=document.getElementsByClassName("renemy");
+        for(var n=0;n<lenemy.length;n++){
+            var path=parseInt(lenemy[n].style.left);
+            if (path<88){
+                path++;
+                lenemy[n].style.left=path+"%";
+            }
+            else {
+                lenemy[n].classList.add("renemy");
+                lenemy[n].classList.remove("lenemy");
+            }
+        }
+        for(var n=0;n<renemy.length;n++){
+            var rpath=parseInt(renemy[n].style.left);
+            if (rpath>=1){
+                rpath--;
+                renemy[n].style.left=rpath+"%";
+            }
+            else {
+                renemy[n].classList.add("lenemy");
+                renemy[n].classList.remove("renemy");
+            }
+        }
+        decide();
+    }
+    window.onload=function (){
+        change(0,1);
+        eauto();
+    }
+
+    //碰撞判定
+    function decide() {
+        if(i!=0&&i!=ren.length-1){
+            if (Math.abs((parseInt(ren[i].style.left)+10)-(parseInt(enemy[i-1].style.left)+5))<13){
+                laps[i].style.background="#019b45";
+                ren[i].style.background="transparent";
+                laps[0].style.background="green";
+                ren[0].style.background="red";
+                i=0;
+            }
+        }
+    }
+</script>
+</html>

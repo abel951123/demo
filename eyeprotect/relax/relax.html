@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #begin{
+            width: 1440px;
+            height: 760px;
+        }
+        .cen{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.86);
+            background: #019b45;
+        }
+        .cen>div{
+            width: 100%;
+            height: 100%;
+            transform: scale(0.84);
+            background: white;
+        }
+    </style>
+</head>
+<body>
+<div id="begin"></div>
+</body>
+<script>
+    //加载远眺图,num为远眺层数
+    function loading(num) {
+        var str="";
+        for(var n=0;n<num;n++){
+            str+="<div class='cen'><div>";
+        }
+        document.getElementById("begin").innerHTML=str;
+    }
+    loading(15);
+
+    var laps=document.getElementsByClassName("cen");
+    var i=0;
+    function play() {
+        console.log(1);
+        var stn=setTimeout(function () {
+            play();
+        }, 200);
+        if (i<=laps.length-1){
+            change(i,0);
+            i++;
+        }
+        else if (i<(laps.length*2-1)){
+            // console.log(laps.length*2-i);
+            change(laps.length*2-i-2,1);
+            i++;
+        }
+        else
+            i=1;
+    }
+
+    function change(n,m) {
+        laps[n].style.background="green";
+        if (n>=0&&n<=laps.length-1){
+            if(m==0&&n!=0){
+                n--;
+            }
+            else if(n!=laps.length-1){
+                n++;
+            }
+            laps[n].style.background="#019b45";
+        }
+    }
+
+    window.onload=function (){
+        play();
+    }
+</script>
+</html>
