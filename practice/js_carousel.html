@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .au-banner{
+      display: flex;
+      position: relative;
+      transition-duration: 1000ms;
+      transform: translate3d(0px, 0px, 0px);
+    }
+    .au-banner div{
+      flex-shrink: 0;
+      width: 100%;
+      justify-content:center;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+<div style="overflow: hidden">
+  <div class="au-banner">
+    <div><img src="http://124.232.146.113:8101/media/photo/aboutus/banner-1.jpg"   width="100%"></div>
+    <div><img src="http://124.232.146.113:8101//media/photo/aboutus/banner-2.jpg"   width="100%"></div>
+    <div><img src="http://124.232.146.113:8101/media/photo/aboutus/banner-1.jpg"   width="100%"></div>
+  </div>
+</div>
+<script>
+  var time=1
+  var n=1
+  function calouse() {
+    setTimeout(function () {
+      if (time%2==0||time%4==1){
+        aggg()
+        n++
+      }
+      calouse()
+    },1500);
+    time++
+  }
+  var b=1;
+  function aggg() {
+    $(".au-banner").css("transition-duration","1000ms")
+    var a=$(".au-banner div img")[0].width;
+    if (b==3){
+      b=1;
+      $(".au-banner").css("transition-duration","0ms")
+      $(".au-banner").css("transform","translate3d("+0+"px,0px ,0px)")
+      return false
+    }
+    $(".au-banner").css("transform","translate3d("+-a*b+"px,0px ,0px)")
+    b++;
+  }
+  calouse();
+</script>
+</body>
+</html>
