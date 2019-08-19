@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+<script type="text/babel">
+  class MyInput extends React.Component{
+    constructor(props){
+      super(props)
+      this.input = this.input.bind(this)
+    }
+    input(){
+      this.props.fn(this.refs.myinput.value)
+    }
+    render(){
+      return <div>
+        <input ref="myinput" type="text" onChange={this.input}/>
+      </div>
+    }
+  }
+
+  class MyButton extends React.Component{
+    constructor(props){
+      super(props)
+      this.myClick = this.myClick.bind(this)
+    }
+    myClick(){
+      this.props.msg()
+      console.log(this.props.msg());
+    }
+    render(){
+      return <button ref="mybutton" onClick={this.myClick}>input</button>
+    }
+  }
+
+   function MyBMain() {
+     var userMsg = ''
+     function mychange(res){
+       userMsg = res
+     }
+     function getMsg(){
+       return userMsg
+     }
+     return <div>
+       <MyInput fn={mychange}/>
+       <MyButton msg={getMsg}/></div>
+   }
+
+
+//  class MyBMain extends React.Component{
+//    constructor(props){
+//      super(props)
+//      this.userMsg = ''
+//      this.mychange = this.mychange.bind(this)
+//      this.getMsg = this.getMsg.bind(this)
+//    }
+//    mychange(res){
+//      this.userMsg = res
+//    }
+//    getMsg(){
+//      return this.userMsg
+//    }
+//    render(){
+//      return <div>
+//        <MyInput fn={this.mychange}/>
+//       <MyButton msg={this.getMsg}/></div>
+//    }
+//  }
+
+  ReactDOM.render(
+    <MyBMain/>,
+    document.getElementById("hello")
+  )
+</script>
+</body>
+</html>

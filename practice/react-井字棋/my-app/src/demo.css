@@ -1,0 +1,12 @@
+.game-bord{
+    margin: 0 auto;
+    width: 150px;
+}
+.borad-row{
+    overflow: hidden;
+}
+.borad-row button{
+    height: 50px;
+    width: 50px;
+    float: left;
+}

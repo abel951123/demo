@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+  <script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+  <script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<body>
+<div id="hello"></div>
+
+<script type="text/babel">
+  class Myparent extends React.Component {
+    myClick1(arg1){
+      console.log("50"+arg1);
+    }
+    myClick2(arg1){
+      console.log("100"+arg1);
+    }
+    render(){
+      return <ul>
+        <Mychild name="50" mC={this.myClick1}></Mychild>
+        <Mychild name="100" mC={this.myClick2}></Mychild>
+      </ul>
+    }
+  }
+
+  class Mychild extends React.Component {
+    myIndex=10
+    myClick(){
+      this.props.mC(this.myIndex)
+    }
+    render(){
+      return <li onClick={this.myClick}>{this.props.name}</li>
+    }
+  }
+
+  ReactDOM.render(
+    <Myparent></Myparent>,
+    document.getElementById("hello")
+  )
+</script>
+</body>
+</html>
