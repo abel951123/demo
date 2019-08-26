@@ -2,9 +2,9 @@
     <div class="header container">
       <router-link class="header-logo" to="/index"></router-link>
       <div class="header-items">
-        <a><i class="icon-search2"></i><span>图书检索</span></a>
-        <a><i class="icon-user-avatar"></i>我的图书馆</a>
-        <router-link to="/index/museumNavigation"><i class="icon-location3"></i><span>"一卡通"导航</span></router-link>
+        <a><i class="icon icon-search2"></i><span>图书检索</span></a>
+        <a><i class="icon icon-user-avatar"></i>我的图书馆</a>
+        <router-link to="/index/museumNavigation"><i class="icon icon-location3"></i><span>"一卡通"导航</span></router-link>
       </div>
       <router-link class="header-menu" to="/index/fullMenu" tag="span"></router-link>
     </div>
@@ -30,7 +30,7 @@
     width: 310px;
     height: 100%;
     padding: 40px 0;
-    background: url(/static/images/logo-pc.png) no-repeat 0;
+    background: url(../../static/images/logo-pc.png) no-repeat 0;
     background-size: 100%;
   }
   .header-items{
@@ -56,6 +56,8 @@
     padding-right: 10px;
     padding-left: 3px;
     font-size: 18px;
+    text-decoration: none;
+    color: #2c3e50;
   }
   .header-items span{
     margin-left: 10px;
@@ -74,19 +76,19 @@
     font-family: iconfont;
     content: "\e611";
   }
-  .icon-search2:before{
+  .icon
+  {
     font-family: iconfont;
-    content: "\e614";
     font-size: 20px;
+    font-style: normal;
+  }
+  .icon-search2:before{
+    content: "\e614";
   }
   .icon-user-avatar:before{
-    font-family: iconfont;
     content: "\e615";
-    font-size: 20px;
   }
   .icon-location3:before{
-    font-family: iconfont;
     content: "\e613";
-    font-size: 20px;
   }
 </style>

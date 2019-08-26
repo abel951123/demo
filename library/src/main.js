@@ -4,27 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import '@/assets/css/app'
-
-import VueAwesomeSwiper from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
-import Swiper from 'swiper'
-
-Vue.use(VueAwesomeSwiper)
-
-Swiper.use({
-  name: 'pluginName',
-  params: {
-    pluginSwitch: false
-  },
-  on: {
-    init () {
-      if (!this.params.pluginSwitch) return
-      console.log('init')
-    }
-    // swiper callback...
-  }
-})
+import '@/assets/css/app.css'
 
 Vue.config.productionTip = false
 

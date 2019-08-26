@@ -34,10 +34,10 @@
       </div>
       <div class="footer-bottom">
         <ul class="internet-contact">
-          <li><i class="icon-phone"></i></li>
-          <li><i class="icon-android"></i></li>
-          <li><i class="icon-wechat"></i></li>
-          <li><i class="icon-weibo"></i></li>
+          <li><i class="icon icon-phone"></i></li>
+          <li><i class="icon icon-android"></i></li>
+          <li><i class="icon icon-wechat"></i></li>
+          <li><i class="icon icon-weibo"></i></li>
         </ul>
         <ul class="component-miniFooter">
           <li>版权所有©上海图书馆(上海科学技术情报研究所) 2016-2018</li>
@@ -141,6 +141,11 @@ export default {
 .component-miniFooter li{
   font-size: 14px;
   margin-top: 3px;
+}
+.icon
+{
+  font-family: iconfont;
+  font-style: normal;
 }
 .icon-phone:before{
   content: "\e610";

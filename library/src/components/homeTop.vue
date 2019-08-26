@@ -8,10 +8,9 @@
               <swiper-slide v-for="(item,index) in sliders" :key="index">
                 <img :src="item.img" alt="">
               </swiper-slide>
-              <div class="swiper-pagination"  slot="pagination"></div>
+              <div class="swiper-pagination swiper-pagination-bullets"  slot="pagination"></div>
               <div class="swiper-button-prev swiper-button-white" slot="button-prev"></div>
               <div class="swiper-button-next swiper-button-white" slot="button-next"></div>
-              <div class="swiper-scrollbar"   slot="scrollbar"></div>
             </swiper>
           </div>
           <div class="news-aside">
@@ -36,18 +35,19 @@
 
 <script>
 import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
 let sliders = [
   {
-    img: '../../static/images/s-1.jpg'
+    img: '@/../static/images/s-1.jpg'
   },
   {
-    img: '../../static/images/s-2.jpg'
+    img: '@/../static/images/s-2.jpg'
   },
   {
-    img: '../../static/images/s-3.jpg'
+    img: '@/../static/images/s-3.jpg'
   },
   {
-    img: '../../static/images/s-4.jpg'
+    img: '@/../static/images/s-4.jpg'
   }
 ]
 let entrance = [
@@ -73,13 +73,45 @@ export default {
       sliders,
       entrance,
       swiperOption: {
+        autoplay: true,
         loop: true,
-        autoplay: 3000
+        grabCursor: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          bulletClass: 'my-bullet',
+          bulletActiveClass: 'my-bullet-active'
+        }
       }
     }
+  },
+  components: {
+    swiper,
+    swiperSlide
   }
 }
 </script>
+
+<style>
+.my-bullet{
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+  border-radius: 100%;
+  opacity: .2;
+  background: #fff;
+  width: 16px;
+  height: 16px;
+  margin: 8px 5px 5px;
+  span:0 5px
+}
+.my-bullet-active{
+  opacity: 1;
+}
+</style>
 
 <style scoped>
 .grey{
@@ -103,6 +135,24 @@ export default {
   display: block;
   width: 100%;
   height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+.swiper-container{
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  z-index: 1;
+  height: 100%;
+}
+.swiper-pagination{
+  position: absolute;
+  bottom: 0!important;
+  width: 100%;
+  background: rgba(0,0,0,.6);
+  height: 35px;
 }
 .news-main{
   display: inline-block;

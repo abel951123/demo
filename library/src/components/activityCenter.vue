@@ -10,7 +10,7 @@
               <li v-for="(item,index) in active" :key="index">
                 <div class="active-block">
                   <div class="active-block-img">
-                    <img :src="'../static/'+item.img" alt="">
+                    <img :src="'@/../static/'+item.img" alt="">
                   </div>
                   <div class="active-block-content">
                     <p>{{item.title}}</p>
@@ -32,11 +32,13 @@
                 <div class="title">
                   {{time}}
                 </div>
-                <div class="r">
-                  <div></div>
+                <div class="r"></div>
+              </div>
+              <div class="cal-body">
+                <div class="dates">
+                  <div v-for="count in 31" :key="count">{{day===count?'今天':count}}</div>
                 </div>
               </div>
-              <div class="cal-body"></div>
             </div>
           </div>
         </div>
@@ -56,7 +58,6 @@ export default {
       method: 'get',
       url: 'https://easy-mock.com/mock/5d3c4fa5f5031b727920284c/example/test'
     }).then((res) => {
-      console.log(res.data.active)
       this.active = res.data.active
     }).catch((err) => {
       console.log(err)
@@ -65,7 +66,8 @@ export default {
   data () {
     return {
       active: [],
-      time: 0
+      time: 0,
+      day: new Date().getDate()
     }
   },
   methods: {
@@ -123,7 +125,7 @@ export default {
   padding: 0;
 }
 .list-container li{
-  border-bottom: gray solid 1px;
+  border-bottom:1px solid #eee;
 }
 .list-container li:not(:first-child){
   margin-top: 30px;
@@ -143,9 +145,9 @@ export default {
 }
 .active-block{
   display: inline-block;
-  margin-bottom: 30px;
-
+  margin-bottom: 29px;
 }
+
 .active-block-img{
   width: 192px;
   height: 119px;
@@ -218,6 +220,22 @@ export default {
   border-right: 1px solid currentColor;
   transform: rotate(45deg);
 }
+.dates{
+  margin-top:20px;
+}
+.dates div{
+  position: relative;
+  float: left;
+  display: block;
+  width: 14.285%;
+  height: 52px;
+  text-align: center;
+  color: #474e56;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  cursor: pointer;
+  float: left;
+  line-height: 20px;
+}
 .title{
   width: 60%;
   line-height: 28px;
@@ -225,4 +243,5 @@ export default {
   position: relative;
   float: left;
 }
+
 </style>
